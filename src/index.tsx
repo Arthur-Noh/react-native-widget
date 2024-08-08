@@ -17,6 +17,10 @@ const Widget = NativeModules.Widget
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Widget.multiply(a, b);
-}
+export const updateWidgetText = async (text: string): Promise<void> => {
+  try {
+    await Widget.updateWidgetText(text);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};

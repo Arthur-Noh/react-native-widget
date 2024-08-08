@@ -1,22 +1,29 @@
 package com.widget
 
+import android.content.Intent
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 
-class WidgetModule(reactContext: ReactApplicationContext) :
-  ReactContextBaseJavaModule(reactContext) {
+class WidgetModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String {
     return NAME
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  fun multiply(a: Double, b: Double, promise: Promise) {
-    promise.resolve(a * b)
+  fun updateWidgetText(text: String, promise: Promise) {
+    try {
+      val intent = Intent(reactContext, WidgetProvider::class.java).apply {
+        action = "com.widget.action.UPDATE_WIDGET"
+        putExtra("widget_text", text)
+      }
+      reactContext.sendBroadcast(intent)
+      promise.resolve(null)
+    } catch (e: Exception) {
+      promise.reject("Error", e)
+    }
   }
 
   companion object {

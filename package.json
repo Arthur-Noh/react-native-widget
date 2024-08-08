@@ -183,5 +183,8 @@
     "type": "module-legacy",
     "languages": "kotlin-swift",
     "version": "0.40.0"
+  },
+  "nativeModules": {
+    "widget": "./android/src/main/java/com/widget"
   }
 }
