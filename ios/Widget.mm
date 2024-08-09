@@ -2,13 +2,15 @@
 
 @interface RCT_EXTERN_MODULE(Widget, NSObject)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+// 'setSuiteName' Method
+RCT_EXTERN_METHOD(setSuiteName:(NSString *)suiteName)
+
+// 'saveTextToUserDefaults' Method
+RCT_EXTERN_METHOD(saveTextToUserDefaults:(NSString *)text)
 
 + (BOOL)requiresMainQueueSetup
 {
-  return NO;
+return NO;
 }
 
 @end
